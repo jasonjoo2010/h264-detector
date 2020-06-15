@@ -5,15 +5,15 @@ import java.nio.ByteBuffer;
 import com.yoloho.training.utils.BufferUtil;
 
 public class BaseBox {
-    private int size;
-    private String type;
+    protected long size;
+    protected String type;
     
     public BaseBox(ByteBuffer buffer) {
         this.size = buffer.getInt();
         this.type = BufferUtil.loadString(buffer, 4);
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 

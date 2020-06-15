@@ -46,16 +46,25 @@ public class Parser {
             int pos = buffer.position();
             switch (box.getType()) {
                 case "ftyp":
-                    boxes.add(new TypeBox(buffer));
+                    box = new TypeBox(buffer);
+                    boxes.add(box);
                     break;
                 case "moov":
-                    boxes.add(new MoovBox(buffer));
+                    box = new MoovBox(pos, buffer);
+                    boxes.add(box);
                     break;
                 case "mdat":
-                    boxes.add(new MdatBox(buffer));
+                    box = new MdatBox(buffer);
+                    boxes.add(box);
                     break;
                 case "free":
-                    boxes.add(new FreeBox(buffer));
+                    box = new FreeBox(buffer);
+                    boxes.add(box);
+                    break;
+                    
+                case "uuid":
+                case "wide":
+                    // ignore
                     break;
 
                 default:
@@ -63,7 +72,7 @@ public class Parser {
                     break;
             }
             pos += box.getSize();
-            if (pos >= buffer.limit()) {
+            if (pos < 1 || pos >= buffer.limit()) {
                 break;
             }
             buffer.position(pos);
