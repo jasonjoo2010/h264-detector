@@ -1,6 +1,11 @@
 # Introduction
 
+h264-detector is used to determine whether a video specified by file / url is in h264 format.
 
+```shell
+mvn clean package
+java -jar target/h264-detector-0.0.1-jar-with-dependencies.jar <location>
+```
 
 # Reference
 
